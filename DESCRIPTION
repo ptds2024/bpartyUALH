@@ -23,7 +23,8 @@ Imports:
     httr,
     tidyr,
     scales,
-    pracma
+    pracma,
+    shinytest2
 RoxygenNote: 7.3.2
 Suggests: 
     testthat (>= 3.0.0)
