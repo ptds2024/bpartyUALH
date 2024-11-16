@@ -4,7 +4,18 @@ library(owmr)
 library(dplyr)
 library(lubridate)
 
-# Retrieve and store 5-day, 3-hour forecast data
+#' Retrieve and store 5-day, 3-hour forecast data
+#'
+#' @title Get Weather Forecast
+#' @description This function retrieves and stores 5-day, 3-hour forecast data for a specified city.
+#' @param city A character string specifying the city for which to retrieve the weather forecast.
+#' @return A data frame containing the date, temperature, humidity, and pressure for the forecast period.
+#' @examples
+#' \dontrun{
+#'   forecast <- get_weather_forecast("Geneva")
+#'   print(forecast)
+#' }
+#' @export
 get_weather_forecast <- function(city) {
   forecast_df <- data.frame(
     date = character(),
