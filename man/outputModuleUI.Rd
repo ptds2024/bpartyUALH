@@ -2,30 +2,16 @@
 % Please edit documentation in R/output_module.R
 \name{outputModuleUI}
 \alias{outputModuleUI}
-\title{Output Module UI and Server}
+\title{Output Module UI}
 \usage{
 outputModuleUI(id)
 }
 \arguments{
 \item{id}{A unique identifier for the module.}
-
-\item{input, }{output, session Standard Shiny server arguments.}
-
-\item{is_valid_city}{Reactive value indicating if the city is valid.}
-
-\item{selected_city}{Reactive value containing the selected city name.}
-
-\item{parameter}{Reactive value for the weather parameter.}
-
-\item{simulations}{Reactive value for the number of simulations.}
-
-\item{run_simulation}{Reactive event for triggering the simulation.}
-
-\item{API_KEY}{A string containing the API key for the weather service.}
 }
 \value{
-No direct return; renders UI components dynamically.
+A tagList containing the UI components.
 }
 \description{
-This module displays the current weather, forecast data, and simulation results.
+This function creates the UI components for the output module.
 }

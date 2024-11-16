@@ -31,7 +31,7 @@ calculate_lambda <- function(temperature, humidity, pressure) {
 #' }
 #' @export
 simulate_guest_count <- function(lambda) {
-  rpois(1, lambda)
+  stats::rpois(1, lambda)
 }
 
 #' Simulate cone consumption per guest
@@ -47,5 +47,5 @@ simulate_guest_count <- function(lambda) {
 #' }
 #' @export
 simulate_cones_per_guest <- function(guest_count) {
-  rbinom(guest_count, size = 1, prob = 0.67) + 1
+  stats::rbinom(guest_count, size = 1, prob = 0.67) + 1
 }

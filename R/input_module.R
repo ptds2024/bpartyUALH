@@ -11,27 +11,27 @@
 #' inputModule(input, output, session, API_KEY)
 #' @export
 inputModuleUI <- function(id) {
-  ns <- NS(id)
-  tagList(
-    textInput(ns("city"), "City", value = "Lausanne"),
-    selectInput(
+  ns <- shiny::NS(id)
+  shiny::tagList(
+    shiny::textInput(ns("city"), "City", value = "Lausanne"),
+    shiny::selectInput(
       ns("parameter"),
       "Parameter",
       choices = c("Temperature" = "temperature", "Humidity" = "humidity", "Pressure" = "pressure")
     ),
-    actionButton(ns("submit"), "Submit"),
-    numericInput(ns("simulations"), "Number of Simulations", value = 10000, min = 1),
-    actionButton(ns("run_simulation"), "Run Simulation", icon = icon("play"))
+    shiny::actionButton(ns("submit"), "Submit"),
+    shiny::numericInput(ns("simulations"), "Number of Simulations", value = 10000, min = 1),
+    shiny::actionButton(ns("run_simulation"), "Run Simulation", icon = shiny::icon("play"))
   )
 }
 
 #' @export
 inputModule <- function(input, output, session, API_KEY) {
-  is_valid_city <- reactiveVal(FALSE)
-  selected_city <- reactiveVal(NULL)
+  is_valid_city <- shiny::reactiveVal(FALSE)
+  selected_city <- shiny::reactiveVal(NULL)
 
-  observeEvent(input$submit, {
-    req(input$city)
+  shiny::observeEvent(input$submit, {
+    shiny::req(input$city)
     valid_city <- check_city_validity(input$city, API_KEY)
 
     if (valid_city) {
@@ -39,7 +39,7 @@ inputModule <- function(input, output, session, API_KEY) {
       selected_city(input$city)
     } else {
       is_valid_city(FALSE)
-      showModal(modalDialog(
+      shiny::showModal(shiny::modalDialog(
         title = "Invalid City",
         "The city name entered is not valid. Please try again.",
         easyClose = TRUE
@@ -50,8 +50,8 @@ inputModule <- function(input, output, session, API_KEY) {
   list(
     is_valid_city = is_valid_city,
     selected_city = selected_city,
-    parameter = reactive(input$parameter),
-    simulations = reactive(input$simulations),
-    run_simulation = reactive(input$run_simulation)
+    parameter = shiny::reactive(input$parameter),
+    simulations = shiny::reactive(input$simulations),
+    run_simulation = shiny::reactive(input$run_simulation)
   )
 }

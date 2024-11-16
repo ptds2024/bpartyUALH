@@ -1,8 +1,3 @@
-# Required Libraries
-library(owmr)
-library(dplyr)
-library(lubridate)
-
 #' Check City Validity
 #'
 #' This function checks if the city name provided is valid by making a request
@@ -14,9 +9,9 @@ library(lubridate)
 #' @return A logical value (`TRUE` if the city is valid, `FALSE` otherwise).
 #' @export
 check_city_validity <- function(city_name, API_KEY) {
-  response <- GET("http://api.openweathermap.org/data/2.5/weather",
-                  query = list(q = city_name, appid = API_KEY))
-  status <- status_code(response)
+  response <- httr::GET("http://api.openweathermap.org/data/2.5/weather",
+                        query = list(q = city_name, appid = API_KEY))
+  status <- httr::status_code(response)
 
   if (status == 200) {
     return(TRUE)
@@ -31,14 +26,16 @@ check_city_validity <- function(city_name, API_KEY) {
 #' The data is returned in a tidy format with various weather-related variables.
 #'
 #' @param city A character string representing the name of the city.
-#'
+#' @param API_KEY A character string representing the OpenWeatherMap API key.
 #' @return A tibble containing the current weather information for the specified city.
 #' @export
-get_current_weather <- function(city) {
-  # Uncomment the following line to fetch real data
-  current_weather <- get_current(city, units = "metric")
+get_current_weather <- function(city, API_KEY) {
 
-  weather_df <- tibble(
+  owmr::owmr_settings(API_KEY)
+
+  current_weather <- owmr::get_current(city, units = "metric")
+
+  weather_df <- dplyr::tibble(
     city = current_weather$name,
     country = current_weather$sys$country,
     temperature = current_weather$main$temp,
@@ -72,7 +69,10 @@ get_current_weather <- function(city) {
 #'
 #' @return A dataframe containing the 5-day weather forecast for the specified city.
 #' @export
-get_weather_forecast <- function(city) {
+get_weather_forecast <- function(city, API_KEY) {
+
+  owmr::owmr_settings(API_KEY)
+
   forecast_df <- data.frame(
     date = character(),
     temperature = numeric(),
@@ -81,13 +81,13 @@ get_weather_forecast <- function(city) {
     stringsAsFactors = FALSE
   )
 
-  forecast_weather <- get_forecast(city, units = "metric")
+  forecast_weather <- owmr::get_forecast(city, units = "metric")
 
   for (i in 1:nrow(forecast_weather$list)) {
     forecast_entry <- forecast_weather$list[i, ]
 
     # Extract relevant fields
-    date_time <- as_datetime(forecast_entry$dt)
+    date_time <- lubridate::as_datetime(forecast_entry$dt)
     temp <- forecast_entry$main.temp
     humidity <- forecast_entry$main.humidity
     pressure <- forecast_entry$main.pressure
@@ -101,8 +101,7 @@ get_weather_forecast <- function(city) {
     ))
   }
 
-  forecast_df <- forecast_df %>%
-    filter(date <= Sys.Date() + days(5))
+  forecast_df <- dplyr::filter(forecast_df, date <= Sys.Date() + lubridate::days(5))
 
   class(forecast_df) <- c("forecast", class(forecast_df))
 
@@ -128,27 +127,27 @@ plot.forecast <- function(forecast_data, variable) {
     stop("Invalid variable. Choose 'temperature', 'humidity', or 'pressure'.")
   }
 
-  forecast_filtered <- forecast_data %>%
-    select(date, value = all_of(variable))
+  forecast_filtered <- dplyr::select(forecast_data, date, value = dplyr::all_of(variable))
 
-  ggplot(forecast_filtered, aes(x = date, y = value)) +
-    geom_line(color = "#00BFC4", size = 1.2) +
-    geom_point(color = "#F8766D", size = 3) +
-    geom_area(fill = "lightblue", alpha = 0.1) +
-    labs(
+
+  ggplot2::ggplot(forecast_filtered, ggplot2::aes(x = date, y = value)) +
+    ggplot2::geom_line(color = "#00BFC4", size = 1.2) +
+    ggplot2::geom_point(color = "#F8766D", size = 3) +
+    ggplot2::geom_area(fill = "lightblue", alpha = 0.1) +
+    ggplot2::labs(
       title = paste("5-Day Forecast -", variable),
       x = "Date",
       y = variable
     ) +
-    scale_x_datetime(date_labels = "%b %d", date_breaks = "1 day") +
-    theme_minimal(base_size = 14) +
-    theme(
-      plot.title = element_text(face = "bold", color = "#343A40", size = 16, hjust = 0.5),
-      axis.title.x = element_text(color = "#343A40", size = 12, margin = margin(t = 10)),
-      axis.title.y = element_text(color = "#343A40", size = 12, margin = margin(r = 10)),
-      axis.text = element_text(color = "#343A40"),
-      panel.grid.major = element_line(color = "#E5E5E5"),
-      panel.grid.minor = element_blank(),
-      plot.background = element_rect(fill = "#F8F9FA")
+    ggplot2::scale_x_datetime(date_labels = "%b %d", date_breaks = "1 day") +
+    ggplot2::theme_minimal(base_size = 14) +
+    ggplot2::theme(
+      plot.title = ggplot2::element_text(face = "bold", color = "#343A40", size = 16, hjust = 0.5),
+      axis.title.x = ggplot2::element_text(color = "#343A40", size = 12, margin = ggplot2::margin(t = 10)),
+      axis.title.y = ggplot2::element_text(color = "#343A40", size = 12, margin = ggplot2::margin(r = 10)),
+      axis.text = ggplot2::element_text(color = "#343A40"),
+      panel.grid.major = ggplot2::element_line(color = "#E5E5E5"),
+      panel.grid.minor = ggplot2::element_blank(),
+      plot.background = ggplot2::element_rect(fill = "#F8F9FA")
     )
 }

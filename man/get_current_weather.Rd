@@ -4,10 +4,12 @@
 \alias{get_current_weather}
 \title{Get Current Weather}
 \usage{
-get_current_weather(city)
+get_current_weather(city, API_KEY)
 }
 \arguments{
 \item{city}{A character string representing the name of the city.}
+
+\item{API_KEY}{A character string representing the OpenWeatherMap API key.}
 }
 \value{
 A tibble containing the current weather information for the specified city.

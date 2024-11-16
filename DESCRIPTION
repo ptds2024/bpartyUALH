@@ -1,12 +1,27 @@
-Package: bpartyUALH
-Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Package: bpartyUALH 
+Type: Package 
+Title: Weather and Ice Cream Party Simulation 
+Version: 0.1.0 
+Date: 2024-11-16 
+Authors@R: person(given = "Urs", family = "Hurni", email = "urs.hurni@unil.ch", role = c("aut", "cre")) 
+Description: This package provides tools for simulating ice cream consumption at parties based on weather forecasts.
 Encoding: UTF-8
 LazyData: true
+Imports:
+    purrr,
+    microbenchmark,
+    lubridate,
+    ggplot2,
+    MASS,
+    shiny,
+    owmr,
+    jsonlite,
+    dplyr,
+    dotenv,
+    rvest,
+    stringr,
+    httr,
+    tidyr,
+    scales,
+    pracma
 RoxygenNote: 7.3.2
