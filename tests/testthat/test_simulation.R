@@ -1,7 +1,7 @@
 library(dotenv)
 library(testthat)
 
-load_dot_env(file = ".env")
+dotenv::load_dot_env(file = file.path(rprojroot::find_rstudio_root_file(), ".env"))
 API_KEY <- Sys.getenv("API_KEY")
 
 test_that("simulate_parties generates valid outputs", {

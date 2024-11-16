@@ -8,8 +8,6 @@ inputModuleUI(id)
 }
 \arguments{
 \item{id}{A unique identifier for the module.}
-
-\item{API_KEY}{A string containing the API key for the weather service.}
 }
 \value{
 Reactive values including `is_valid_city`, `selected_city`, `parameter`, `simulations`, and `run_simulation`.

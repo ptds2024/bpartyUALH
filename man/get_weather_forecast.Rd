@@ -8,6 +8,8 @@ get_weather_forecast(city, API_KEY)
 }
 \arguments{
 \item{city}{A character string representing the name of the city.}
+
+\item{API_KEY}{A character string representing the OpenWeatherMap API key.}
 }
 \value{
 A dataframe containing the 5-day weather forecast for the specified city.

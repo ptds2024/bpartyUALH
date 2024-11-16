@@ -1,3 +1,5 @@
+utils::globalVariables("value")
+
 #' Check City Validity
 #'
 #' This function checks if the city name provided is valid by making a request
@@ -66,7 +68,7 @@ get_current_weather <- function(city, API_KEY) {
 #' The forecast includes temperature, humidity, and pressure data.
 #'
 #' @param city A character string representing the name of the city.
-#'
+#' @param API_KEY A character string representing the OpenWeatherMap API key.
 #' @return A dataframe containing the 5-day weather forecast for the specified city.
 #' @export
 get_weather_forecast <- function(city, API_KEY) {
@@ -113,12 +115,14 @@ get_weather_forecast <- function(city, API_KEY) {
 #' This function generates a plot for the 5-day weather forecast of a chosen variable (temperature, humidity, or pressure).
 #' The plot includes a line, points, and an area shaded under the curve.
 #'
-#' @param forecast_data A dataframe or tibble of class `forecast` containing the forecasted weather data.
+#' @param x A `forecast` object containing the weather forecast data.
 #' @param variable A character string indicating the variable to be plotted ("temperature", "humidity", or "pressure").
+#' @param ... Additional arguments to be passed to the `ggplot` function.
 #'
 #' @return A `ggplot` object displaying the weather forecast plot.
 #' @export
-plot.forecast <- function(forecast_data, variable) {
+plot.forecast <- function(x, variable, ...) {
+  forecast_data <- x
   if (!inherits(forecast_data, "forecast")) {
     stop("The data provided is not of class 'forecast'")
   }

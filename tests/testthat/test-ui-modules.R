@@ -1,9 +1,8 @@
 library(dotenv)
 library(testthat)
-library(shinytest2)
 
 
-load_dot_env(file = ".env")
+dotenv::load_dot_env(file = file.path(rprojroot::find_rstudio_root_file(), ".env"))
 API_KEY <- Sys.getenv("API_KEY")
 
 # Test for inputModuleUI()

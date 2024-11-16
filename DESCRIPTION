@@ -3,29 +3,24 @@ Type: Package
 Title: Weather and Ice Cream Party Simulation 
 Version: 0.1.0 
 Date: 2024-11-16 
+License: MIT + file LICENSE
 Authors@R: person(given = "Urs", family = "Hurni", email = "urs.hurni@unil.ch", role = c("aut", "cre")) 
 Description: This package provides tools for simulating ice cream consumption at parties based on weather forecasts.
 Encoding: UTF-8
 LazyData: true
 Imports:
-    purrr,
-    microbenchmark,
-    lubridate,
-    ggplot2,
-    MASS,
-    shiny,
-    owmr,
-    jsonlite,
+    rprojroot,
     dplyr,
-    dotenv,
-    rvest,
-    stringr,
+    ggplot2,
     httr,
-    tidyr,
-    scales,
+    lubridate,
+    owmr,
     pracma,
-    shinytest2
+    shiny,
 RoxygenNote: 7.3.2
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    dotenv
 Config/testthat/edition: 3
+URL: https://github.com/ualh/bpartyUALH
+BugReports: https://github.com/ualh/bpartyUALH/issues

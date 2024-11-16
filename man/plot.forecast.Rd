@@ -4,12 +4,14 @@
 \alias{plot.forecast}
 \title{Plot Forecast Data}
 \usage{
-\method{plot}{forecast}(forecast_data, variable)
+\method{plot}{forecast}(x, variable, ...)
 }
 \arguments{
-\item{forecast_data}{A dataframe or tibble of class `forecast` containing the forecasted weather data.}
+\item{x}{A `forecast` object containing the weather forecast data.}
 
 \item{variable}{A character string indicating the variable to be plotted ("temperature", "humidity", or "pressure").}
+
+\item{...}{Additional arguments to be passed to the `ggplot` function.}
 }
 \value{
 A `ggplot` object displaying the weather forecast plot.

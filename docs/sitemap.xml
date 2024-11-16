@@ -1,0 +1,26 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/reference/calculate_lambda.html</loc></url>
+<url><loc>/reference/calculate_metrics.html</loc></url>
+<url><loc>/reference/calculate_party_totals.html</loc></url>
+<url><loc>/reference/check_city_validity.html</loc></url>
+<url><loc>/reference/cone_radius_with_variation.html</loc></url>
+<url><loc>/reference/generate_random_variations.html</loc></url>
+<url><loc>/reference/get_current_weather.html</loc></url>
+<url><loc>/reference/get_weather_forecast.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/inputModule.html</loc></url>
+<url><loc>/reference/inputModuleUI.html</loc></url>
+<url><loc>/reference/outputModule.html</loc></url>
+<url><loc>/reference/outputModuleUI.html</loc></url>
+<url><loc>/reference/plot.forecast.html</loc></url>
+<url><loc>/reference/runShinyApp.html</loc></url>
+<url><loc>/reference/simulate_cones_per_guest.html</loc></url>
+<url><loc>/reference/simulate_guest_count.html</loc></url>
+<url><loc>/reference/simulate_parties.html</loc></url>
+</urlset>
+

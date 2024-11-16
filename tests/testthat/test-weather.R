@@ -2,9 +2,8 @@ library(testthat)
 library(bpartyUALH)
 library(dotenv)
 
-load_dot_env(file = ".env")
+dotenv::load_dot_env(file = file.path(rprojroot::find_rstudio_root_file(), ".env"))
 API_KEY <- Sys.getenv("API_KEY")
-
 
 test_that("get_current_weather works for valid city", {
   weather <- bpartyUALH::get_current_weather("lausanne", API_KEY)
